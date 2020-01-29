@@ -1,6 +1,10 @@
 var triviaQuestions = [];
 var wins = 0;
 var losses = 0;
+var timeInterval;
+var timeLimit = 30;
+var time = timeLimit;
+var clockRunning = true;
 
 class Question
 {
@@ -14,8 +18,9 @@ class Question
 
 window.onload = function()
 {
-    populateTriviaQuestions();
-    setNewQuestion();
+    resetGame();
+    timeInterval = setInterval(count, 1000);
+
 }
 
 // Adds question objects to triviaQuestions array
@@ -32,6 +37,8 @@ function populateTriviaQuestions()
 // setup new question --update question label, radio button text, unselect previous radio button. remove previous question
 function setNewQuestion()
 {
+    $('input[name="option"]').prop("checked", false);
+
     if(triviaQuestions.length !== 0)
     {
         $("#currentTriviaQuestion").text(triviaQuestions[0].question);
@@ -43,9 +50,11 @@ function setNewQuestion()
     }
     else
     {
-        //alert score?
+        alert("End of game! \nYour total score is: " + wins + " wins to " + losses + " losses. \nPress the Reset Game button to play again.")
     }
+
 }
+
 
 // check question against answer - call setup new random question, update win/loss count.
 function answerCheck()
@@ -65,12 +74,68 @@ function answerCheck()
     }
 
     triviaQuestions.shift();
-
     setNewQuestion();
 }
 
 // check timer
 function checkTimer()
 {
+    if(time <= 0)
+    {
+        alert("You have run out of time, press the Reset Game button to try again!");
 
+        clearInterval(timeInterval);
+        clockRunning = false;
+    }
 }
+
+function beginTimer()
+{
+    $("#countdownTimer").text("00:30");
+    time = timeLimit;
+    clockRunning = true;
+}
+
+function count()
+{
+    if(clockRunning)
+    {
+        time--;
+
+        var currentTime = timeConverter(time);
+
+        $("#countdownTimer").html(currentTime);
+
+        checkTimer();
+    }
+}
+
+function timeConverter(time) {
+
+    var minutes = Math.floor(time / 60);
+    var seconds = time - (minutes * 60);
+  
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+  
+    if (minutes === 0) {
+      minutes = "00";
+    }
+  
+    else if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+  
+    return minutes + ":" + seconds;
+  }
+
+function resetGame()
+{
+    populateTriviaQuestions();
+    setNewQuestion();
+    beginTimer();
+    wins = 0;
+    losses = 0;
+}
+
