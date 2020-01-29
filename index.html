@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TriviaGame</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+
+</head>
+<body>
+
+<container>
+    <h1>Totally Trivial Trivia</h1>
+
+    <label id = "timeRemaining">
+        Time Remaining: 
+        <label id = "countdownTimer">
+
+        </label>
+    </label>
+    <br>
+
+    <label id = "currentTriviaQuestion">
+
+    </label>
+    <br>
+
+    <input type = "radio" id = "firstRadioOption" name = "option" value = "0"><label for = "firstRadioOption">option 1</label>
+    <input type = "radio" id = "secondRadioOption" name = "option" value = "1"><label for = "secondRadioOption">option 2</label>
+    <input type = "radio" id = "thirdRadioOption" name = "option" value = "2"><label for = "thirdRadioOption">option 3</label>
+    <input type = "radio" id = "fourthRadioOption" name = "option" value = "3"><label for = "fourthRadioOption">option 4</label>
+    <br>
+
+    <button type = "button" onclick="answerCheck()">Submit</button>
+
+</container>
+    
+</body>
+</html>
